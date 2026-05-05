@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("api/v1/facturas")
+@RequestMapping("api/v2/facturas")
 public class FacturaController {
     @Autowired
     private FacturaService facturaService;
