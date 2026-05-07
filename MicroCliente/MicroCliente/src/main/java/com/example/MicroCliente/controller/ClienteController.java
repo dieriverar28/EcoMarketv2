@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("api/v1/clientes")
+@RequestMapping("api/v2/clientes")
 public class ClienteControlller {
     @Autowired
     private ClienteService clienteService;

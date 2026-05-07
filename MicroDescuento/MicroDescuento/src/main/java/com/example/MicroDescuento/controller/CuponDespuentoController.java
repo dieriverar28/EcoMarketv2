@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("api/v1/cupones_descuento")
+@RequestMapping("api/v2/cupones_descuento")
 public class CuponDespuentoController {
     @Autowired
     private CuponDescuentoService cuponDescuentoService;

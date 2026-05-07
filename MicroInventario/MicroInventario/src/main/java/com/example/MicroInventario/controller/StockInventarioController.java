@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("api/v1/stock_inventarios") 
+@RequestMapping("api/v2/stock_inventarios") 
 public class StockInventarioService {
     @Autowired
     private StockInventarioService stockInventarioService;
