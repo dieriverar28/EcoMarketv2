@@ -78,21 +78,20 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setId(request.getId());
         cliente.setNombre(request.getNombre());
         cliente.setEmail(request.getEmail());
-        //seguir aqui
         cliente.setGeneroId(request.getGeneroId());
 
-        Persona guardada = personaRepository.save(persona);
-        log.info("[ms-persona] Persona creada id: {}", guardada.getId());
+        Cliente guardada = clienteRepository.save(cliente);
+        log.info("[MicroCliente] Persona creada id: {}", guardada.getId());
         return mapToResponse(guardada);
     }
 
     @Override
     @Transactional
-    public PersonaDTO.Response actualizar(Long id, PersonaDTO.Request request) {
-        log.info("[ms-persona] Actualizando persona id: {}", id);
+    public ClienteDTO.Response actualizarCliente(Long id, ClienteDTO.Request request) {
+        log.info("[MicroCliente] Actualizando persona id: {}", id);
 
-        Persona persona = personaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Persona no encontrada con id: " + id));
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrada con id: " + id));
 
         verificarGeneroExiste(request.getGeneroId());
 
@@ -100,18 +99,24 @@ public class ClienteServiceImpl implements ClienteService {
         persona.setNombre(request.getNombre());
         persona.setEdad(request.getEdad());
         persona.setGeneroId(request.getGeneroId());
+        cliente.setId(request.getId());
+        cliente.setNombre(request.getNombre());
+        cliente.setEmail(request.getEmail());
+        cliente.setTelefono(request.getTelefono());
+        cliente.setComuna(request.getComuna());
+        cliente.setDireccion_Envio(request.getDireccion_Envio());
 
         return mapToResponse(personaRepository.save(persona));
     }
 
     @Override
     @Transactional
-    public void eliminar(Long id) {
-        log.info("[ms-persona] Eliminando persona id: {}", id);
-        if (!personaRepository.existsById(id)) {
+    public void eliminarCliente(int id) {
+        log.info("[MicroCliente] Eliminando cliente id: {}", id);
+        if (!clienteRepository.existsById(id)) {
             throw new RuntimeException("Persona no encontrada con id: " + id);
         }
-        personaRepository.deleteById(id);
+        clienteRepository.deleteById(id);
     }
 
     /**
@@ -134,13 +139,13 @@ public class ClienteServiceImpl implements ClienteService {
                     .bodyToMono(GeneroDTO.class)
                     .block(); // Convertimos la llamada reactiva a sincrona
 
-            log.debug("[ms-persona] Genero id {} verificado en ms-genero", generoId);
+            log.debug("[MicroCliente] Genero id {} verificado en MicroGenero", generoId);
 
         } catch (WebClientResponseException.NotFound e) {
             throw new RuntimeException("El genero con id " + generoId + " no existe en ms-genero");
         } catch (Exception e) {
-            log.error("[ms-persona] Error al comunicarse con ms-genero: {}", e.getMessage());
-            throw new RuntimeException("Error de comunicacion con ms-genero: " + e.getMessage());
+            log.error("[MicroCliente] Error al comunicarse con MicroGenero: {}", e.getMessage());
+            throw new RuntimeException("Error de comunicacion con MicroGenero: " + e.getMessage());
         }
     }
 
@@ -148,30 +153,33 @@ public class ClienteServiceImpl implements ClienteService {
      * Mapeo Entity -> DTO.
      * Llama a ms-genero via WebClient para enriquecer la respuesta con los datos del genero.
      */
-    private PersonaDTO.Response mapToResponse(Persona persona) {
+    private ClienteDTO.Response mapToResponse(Cliente cliente) {
         GeneroDTO genero = null;
 
         try {
             genero = generoWebClient
                     .get()
-                    .uri("/api/generos/{id}", persona.getGeneroId())
+                    .uri("/api/generos/{id}", cliente.getGeneroId())
                     .retrieve()
                     .bodyToMono(GeneroDTO.class)
                     .block();
 
-            log.debug("[ms-persona] Genero obtenido desde ms-genero: {}", genero.getDescripcion());
+            log.debug("[MicroCliente] Genero obtenido desde MicroGenero: {}", genero.getDescripcion());
 
         } catch (Exception e) {
             // Si ms-genero no responde, devolvemos la persona igual con genero parcial
-            log.warn("[ms-persona] No se pudo obtener genero id: {} - {}", persona.getGeneroId(), e.getMessage());
+            log.warn("[MicroCliente] No se pudo obtener genero id: {} - {}", cliente.getGeneroId(), e.getMessage());
             genero = new GeneroDTO(persona.getGeneroId(), "No disponible");
         }
 
-        return new PersonaDTO.Response(
-                persona.getId(),
-                persona.getRut(),
-                persona.getNombre(),
-                persona.getEdad(),
+        return new ClienteDTO.Response(
+                
+                cliente.getId_cliente(),
+                cliente.getNombre(),
+                cliente.getEmail(),
+                cliente.getTelefono(),
+                cliente.getComuna(),
+                cliente.getDireccion_Envio(),
                 genero
         );
     }
