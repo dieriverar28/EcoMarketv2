@@ -1,4 +1,4 @@
-package com.ejemplo.ms_persona.dto;
+package com.ejemplo.MicroCliente.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
