@@ -1,17 +1,18 @@
 package com.example.MicroInventario.repository;
 
-
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.EcoMarketSPA.model.StockInventario;
+import com.example.MicroInventario.model.StockInventario;
 
 @Repository
-public class StockInventarioRepository {
+
+public interface StockInventarioRepository
+        extends JpaRepository<StockInventario, Integer> {
+
     @Query("SELECT s FROM StockInventario s")
     List<StockInventario> obtenerStockInventario();
 
