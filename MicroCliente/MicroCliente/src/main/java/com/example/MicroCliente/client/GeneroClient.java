@@ -1,4 +1,4 @@
-package com.ejemplo.ms_persona.client;
+package com.ejemplo.MicroCliente.client;
 
 import com.ejemplo.ms_persona.dto.GeneroDTO;
 import org.springframework.cloud.openfeign.FeignClient;
