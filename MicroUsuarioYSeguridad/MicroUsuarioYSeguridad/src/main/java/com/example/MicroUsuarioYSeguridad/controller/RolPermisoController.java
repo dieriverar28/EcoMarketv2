@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.EcoMarketSPA.model.RolPermiso;
-import com.example.EcoMarketSPA.service.RolPermisoService;
+import com.example.MicroUsuarioYSeguridad.modelo.RolPermiso;
+import com.example.MicroUsuarioYSeguridad.service.RolPermisoService;
 
 import jakarta.validation.Valid;
 

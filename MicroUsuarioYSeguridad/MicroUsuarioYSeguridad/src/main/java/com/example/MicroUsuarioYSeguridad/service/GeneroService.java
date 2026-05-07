@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.EcoMarketSPA.model.Genero;
-
-import com.example.EcoMarketSPA.repository.GeneroRepository;
+import com.example.MicroUsuarioYSeguridad.modelo.Genero;
+import com.example.MicroUsuarioYSeguridad.repository.GeneroRepository;
 
 import jakarta.transaction.Transactional;
 

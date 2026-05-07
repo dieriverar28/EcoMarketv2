@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.MicroProducto.modelo.Proveedor;
+import com.example.MicroProducto.model.Proveedor;
 import com.example.MicroProducto.repository.ProveedorRepository;
 
 import jakarta.transaction.Transactional;
