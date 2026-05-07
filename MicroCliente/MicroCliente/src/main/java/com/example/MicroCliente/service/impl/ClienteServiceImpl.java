@@ -1,10 +1,10 @@
-package com.ejemplo.ms_persona.service.impl;
+package com.ejemplo.MicroCliente.service.impl;
 
-import com.ejemplo.ms_persona.dto.GeneroDTO;
-import com.ejemplo.ms_persona.dto.PersonaDTO;
-import com.ejemplo.ms_persona.entity.Persona;
-import com.ejemplo.ms_persona.repository.PersonaRepository;
-import com.ejemplo.ms_persona.service.PersonaService;
+import com.ejemplo.MicroCliente.dto.GeneroDTO;
+import com.ejemplo.MicroCliente.dto.ClienteDTO;
+import com.ejemplo.MicroCliente.model.Cliente;
+import com.ejemplo.MicroCliente.repository.ClienteRepository;
+import com.ejemplo.MicroCliente.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PersonaServiceImpl implements PersonaService {
+public class ClienteServiceImpl implements ClienteService {
 
-    private final PersonaRepository personaRepository;
+    private final ClienteRepository clienteRepository;
 
     /**
      * Spring inyecta el WebClient configurado en WebClientConfig.
@@ -30,9 +30,9 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<PersonaDTO.Response> listarTodos() {
-        log.info("[ms-persona] Listando todas las personas");
-        return personaRepository.findAll()
+    public List<ClienteDTO.Response> listarTodos() {
+        log.info("[MicroCliente] Listando todas las personas");
+        return clienteRepository.findAll()
                 .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -40,29 +40,22 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     @Transactional(readOnly = true)
-    public PersonaDTO.Response buscarPorId(Long id) {
-        log.info("[ms-persona] Buscando persona id: {}", id);
-        Persona persona = personaRepository.findById(id)
+    public ClienteDTO.Response buscarPorId(Long id) {
+        log.info("[MicroCliente] Buscando cliente id: {}", id);
+        Cliente cliente = ClienteRepository.findById(id_cliente)
                 .orElseThrow(() -> {
-                    log.error("[ms-persona] Persona no encontrada id: {}", id);
+                    log.error("[MicroCliente] Persona no encontrada id: {}", id);
                     return new RuntimeException("Persona no encontrada con id: " + id);
                 });
-        return mapToResponse(persona);
+        return mapToResponse(cliente);
     }
+
+    
 
     @Override
     @Transactional(readOnly = true)
-    public PersonaDTO.Response buscarPorRut(String rut) {
-        log.info("[ms-persona] Buscando persona RUT: {}", rut);
-        Persona persona = personaRepository.findByRut(rut)
-                .orElseThrow(() -> new RuntimeException("Persona no encontrada con RUT: " + rut));
-        return mapToResponse(persona);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<PersonaDTO.Response> buscarPorGenero(Long generoId) {
-        log.info("[ms-persona] Buscando personas con generoId: {}", generoId);
+    public List<ClienteDTO.Response> buscarPorGenero(Long generoId) {
+        log.info("[MicroCliente] Buscando personas con generoId: {}", generoId);
         return personaRepository.findByGeneroId(generoId)
                 .stream()
                 .map(this::mapToResponse)
@@ -71,21 +64,22 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     @Transactional
-    public PersonaDTO.Response crear(PersonaDTO.Request request) {
-        log.info("[ms-persona] Creando persona RUT: {}", request.getRut());
+    public ClienteDTO.Response crear(ClienteDTO.Request request) {
+        log.info("[MicroCliente] Creando persona RUT: {}", request.getId());
 
-        if (personaRepository.existsByRut(request.getRut())) {
-            throw new RuntimeException("Ya existe una persona con el RUT: " + request.getRut());
+        if (clienteRepository.existsById(request.getId_cliente())) {
+            throw new RuntimeException("Ya existe una persona con el id: " + request.getId_cliente());
         }
 
         // Verificamos que el genero exista en ms-genero ANTES de guardar
         verificarGeneroExiste(request.getGeneroId());
 
-        Persona persona = new Persona();
-        persona.setRut(request.getRut());
-        persona.setNombre(request.getNombre());
-        persona.setEdad(request.getEdad());
-        persona.setGeneroId(request.getGeneroId());
+        Cliente cliente = new Cliente();
+        cliente.setId(request.getId());
+        cliente.setNombre(request.getNombre());
+        cliente.setEmail(request.getEmail());
+        //seguir aqui
+        cliente.setGeneroId(request.getGeneroId());
 
         Persona guardada = personaRepository.save(persona);
         log.info("[ms-persona] Persona creada id: {}", guardada.getId());
