@@ -13,17 +13,18 @@ public class ClienteDTO {
     public static class Request {
 
         @NotBlank(message = "El RUT es obligatorio")
-        @Size(min = 10, max = 12, message = "El RUT debe tener entre 10 y 12 caracteres")
-        private String rut;
+        @Size(min = 3, max = 10, message = "El ID debe tener entre 3 y 10 caracteres")
+        private int id_cliente;
 
         @NotBlank(message = "El nombre es obligatorio")
         @Pattern(regexp = "^[\\w\\sáéíóúÁÉÍÓÚñÑ]{2,}\\s+[\\w\\sáéíóúÁÉÍÓÚñÑ]{2,}.*$",
                  message = "El nombre debe contener al menos 2 palabras")
         private String nombre;
 
-        @Min(value = 0, message = "La edad no puede ser negativa")
-        @Max(value = 120, message = "La edad no puede superar 120 años")
-        private int edad;
+        @NotBlank(message = "El email es obligatorio")
+        @Pattern(regexp = "^[\\w\\sáéíóúÁÉÍÓÚñÑ]{2,}\\s+[\\w\\sáéíóúÁÉÍÓÚñÑ]{2,}.*$",
+                 message = "El email debe contener al menos 2 palabras")
+        private Sring email;
 
         @NotNull(message = "El ID del género es obligatorio")
         private Long generoId;
@@ -36,10 +37,12 @@ public class ClienteDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Response {
-        private Long id;
-        private String rut;
+        private int id_cliente;
         private String nombre;
-        private int edad;
-        private GeneroDTO genero; // Objeto obtenido consultando ms-genero
+        private String email;
+        private String telefono;
+        private Comuna comuna;
+        private String direccion_envio;
+        private GeneroDTO genero; //objeto obtenido consultando microservicio genero
     }
 }
