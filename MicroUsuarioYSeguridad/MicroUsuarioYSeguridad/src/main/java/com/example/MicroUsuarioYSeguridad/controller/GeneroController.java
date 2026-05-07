@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.EcoMarketSPA.model.Genero;
-import com.example.EcoMarketSPA.service.GeneroService;
+import com.example.MicroUsuarioYSeguridad.modelo.Genero;
+import com.example.MicroUsuarioYSeguridad.service.GeneroService;
 
 import jakarta.validation.Valid;
 

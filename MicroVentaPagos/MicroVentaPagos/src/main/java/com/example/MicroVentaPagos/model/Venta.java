@@ -1,4 +1,4 @@
-package com.example.MicroVentaPagos.modelo;
+package com.example.MicroVentaPagos.model;
 
 import java.sql.Date;
 

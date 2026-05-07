@@ -30,5 +30,4 @@ public class Tienda {
     @ManyToOne
     @JoinColumn(name="id_region", nullable=false)
     private Region region;
-
 }

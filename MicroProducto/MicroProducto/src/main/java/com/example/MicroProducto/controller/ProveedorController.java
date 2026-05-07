@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.MicroProducto.modelo.Proveedor;
+import com.example.MicroProducto.model.Proveedor;
 import com.example.MicroProducto.service.ProveedorService;
 
 import jakarta.validation.Valid;

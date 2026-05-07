@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.EcoMarketSPA.model.RolPermiso;
-import com.example.EcoMarketSPA.repository.RolPermisoRepository;
+import com.example.MicroUsuarioYSeguridad.modelo.RolPermiso;
+import com.example.MicroUsuarioYSeguridad.repository.RolPermisoRepository;
 
 import jakarta.transaction.Transactional;
 

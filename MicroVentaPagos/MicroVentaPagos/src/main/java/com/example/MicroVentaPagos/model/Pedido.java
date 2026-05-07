@@ -36,4 +36,5 @@ public class Pedido {
     @Column(name="fecha_pedido", nullable=false)
     private Date fecha_pedido;
 
+
 }
