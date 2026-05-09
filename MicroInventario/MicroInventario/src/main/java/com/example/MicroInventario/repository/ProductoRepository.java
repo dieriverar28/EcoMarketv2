@@ -1,5 +1,18 @@
 package com.example.MicroInventario.repository;
+import java.util.List;
 
-public class ProductoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.example.EcoMarketSPA.model.Producto;
+@Repository
+public interface ProductoRepository extends JpaRepository<Producto, Integer> {
+    @Query("SELECT p FROM Producto p")
+    List<Producto> obtenerProductos();
+
+    @Query("SELECT p FROM Producto p WHERE p.id_producto = :id_producto")
+    Producto buscarProducto(int id_producto);
+    
 
 }
