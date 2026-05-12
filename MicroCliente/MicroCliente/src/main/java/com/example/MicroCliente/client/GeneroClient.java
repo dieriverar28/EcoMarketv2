@@ -1,6 +1,6 @@
-package com.ejemplo.MicroCliente.client;
+package com.example.MicroCliente.client;
 
-import com.ejemplo.ms_persona.dto.GeneroDTO;
+import com.example.MicroCliente.dto.GeneroDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

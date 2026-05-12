@@ -1,4 +1,4 @@
-package com.ejemplo.MicroCliente.dto;
+package com.example.MicroCliente.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

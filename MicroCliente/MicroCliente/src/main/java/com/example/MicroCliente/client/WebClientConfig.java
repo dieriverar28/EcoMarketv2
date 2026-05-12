@@ -1,4 +1,4 @@
-package com.ejemplo.MicroCliente.client;
+package com.example.MicroCliente.client;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

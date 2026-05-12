@@ -1,4 +1,4 @@
-package com.ejemplo.MicroCliente.dto;
+package com.example.MicroCliente.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
